@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="container" id="mainContainer">
+    <h1>Expense Tracker</h1>
+
+    <!-- Balance Section -->
+    <div class="balance-container">
+      <h2>Total Balance</h2>
+      <p id="balance">₹<%= balance.toFixed(2) %>
+      </p>
+      <a href="/add-balance">
+        <button id="addBalanceMain">Add Balance</button>
+      </a>
+    </div>
+
+    <!-- Income and Expense Summary -->
+    <div class="summary">
+      <div class="income">
+        <h3>Income</h3>
+        <p id="income" class="money plus">+₹0.00</p>
+      </div>
+      <div class="expense">
+        <h3>Expense</h3>
+        <p id="expense" class="money minus">-₹0.00</p>
+      </div>
+    </div>
+
+    <!-- Add Transaction Form -->
+    <div class="form-container">
+      <h2>Add New Transaction</h2>
+      <form id="form">
+        <input type="text" id="text" placeholder="Transaction Description" required />
+        <input type="number" id="amount" placeholder="Amount (₹)" required />
+        <input type="date" id="date" required />
+
+        <!-- NEW BUTTONS -->
+        <div class="transaction-buttons">
+          <button type="button" class="income-btn" id="addToIncomeBtn">Add to Income</button>
+          <button type="button" class="expense-btn" id="addToExpenseBtn">Add to Expense</button>
+        </div>
+
+        <!-- EXTRA BUTTONS -->
+        <div class="extra-buttons">
+          <a href="/transaction-history" class="small-btn history-btn">Transaction History</a>
+          <a href="/chart" class="small-btn summary-btn">Income & Expense</a> <!-- Updated link -->
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function submitTransaction(type) {
+      const description = document.getElementById("text").value;
+      const amount = document.getElementById("amount").value;
+      const date = document.getElementById("date").value;
+
+      if (!description || !amount || !date) {
+        alert("Please fill out all fields");
+        return;
+      }
+
+      const transactionData = {
+        description,
+        amount: parseFloat(amount),
+        date,
+        type
+      };
+
+      fetch("/add-transaction", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(transactionData),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+            alert("Transaction added successfully!");
+
+            // Update balance
+            document.getElementById("balance").textContent = `₹${data.newBalance}`;
+            document.getElementById("income").textContent = `+₹${data.totalIncome}`;
+            document.getElementById("expense").textContent = `-₹${data.totalExpense}`;
+
+            // Reset form fields
+            document.getElementById("text").value = '';
+            document.getElementById("amount").value = '';
+            document.getElementById("date").value = '';
+          } else {
+            alert("Error adding transaction!");
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          alert("An error occurred while adding the transaction.");
+        });
+    }
+
+    document.getElementById("addToIncomeBtn").addEventListener("click", () => {
+      submitTransaction("income");
+    });
+
+    document.getElementById("addToExpenseBtn").addEventListener("click", () => {
+      submitTransaction("expense");
+    });
+  </script>
+
+
+</body>
+
+</html>

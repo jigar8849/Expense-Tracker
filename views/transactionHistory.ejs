@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction History</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Transaction History</h1>
+
+    <table class="transaction-table" id="transactionTable">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Income (₹)</th>
+                <th>Expense (₹)</th>
+                <th>Total Balance (₹)</th>
+            </tr>
+        </thead>
+        <tbody id="transactionTableBody">
+            <% let runningBalance = currentBalance; %> <!-- Starting balance -->
+            <% transactions.forEach(transaction => { %>
+                <tr>
+                    <td><%= new Date(transaction.date).toLocaleDateString() %></td>
+                    <td><%= transaction.description %></td>
+                    
+                    <!-- Display Income if the transaction type is 'income' -->
+                    <td>
+                        <%= transaction.type === 'income' ? `₹${transaction.amount.toFixed(2)}` : '' %>
+                    </td>
+                    
+                    <!-- Display Expense if the transaction type is 'expense' -->
+                    <td>
+                        <%= transaction.type === 'expense' ? `₹${transaction.amount.toFixed(2)}` : '' %>
+                    </td>
+                    
+                    <!-- Calculate the running balance -->
+                    <td>
+                        <%= (() => {
+                            if (transaction.type === 'income') runningBalance += transaction.amount;
+                            else runningBalance -= transaction.amount;
+                            return `₹${runningBalance.toFixed(2)}`;
+                        })() %>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</body>
+</html>

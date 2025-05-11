@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Income & Expense Chart</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Income & Expense Chart</h1>
+
+    <!-- Chart Container -->
+    <div>
+      <canvas id="incomeExpenseChart" width="400" height="400"></canvas>
+    </div>
+
+    <script>
+      // Data passed from the server
+      const totalIncome = <%= totalIncome %>;
+      const totalExpense = <%= totalExpense %>;
+
+      // Create the pie chart
+      const ctx = document.getElementById('incomeExpenseChart').getContext('2d');
+      const incomeExpenseChart = new Chart(ctx, {
+        type: 'pie', // Pie chart type
+        data: {
+          labels: ['Income', 'Expense'],
+          datasets: [{
+            data: [totalIncome, totalExpense], // Data for Income and Expense
+            backgroundColor: ['#4CAF50', '#F44336'], // Green for Income and Red for Expense
+            borderWidth: 1,
+            borderColor: '#fff', // White border color for a neat effect
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'top', // Position of the legend
+            },
+            tooltip: {
+              callbacks: {
+                label: function(tooltipItem) {
+                  // Customizing the tooltip label
+                  return tooltipItem.label + ': ₹' + tooltipItem.raw.toFixed(2);
+                }
+              }
+            }
+          }
+        }
+      });
+    </script>
+  </div>
+</body>
+</html>

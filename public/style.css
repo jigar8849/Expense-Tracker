@@ -1,0 +1,363 @@
+:root {
+  --background: #f4f6f8;
+  --text-color: #1e1e2f;
+  --income-color: #2ecc71;
+  --expense-color: #e74c3c;
+  --accent-color: #3498db;
+  --card-bg: #ffffff;
+  --border-color: #dcdfe3;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--background);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;  /* Stack elements vertically */
+}
+
+.container {
+  background: var(--card-bg);
+  padding: 20px;
+  width: 100%;
+  max-width: 450px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: -22rem;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.balance-container {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.balance-container h2 {
+  font-size: 1.4rem;
+  color: var(--text-color);
+}
+
+.balance-container p {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+#addBalanceMain {
+  margin-top: 10px;
+  background-color: var(--accent-color);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#addBalanceMain:hover {
+  background-color: #2980b9;
+}
+
+.summary {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.income,
+.expense {
+  width: 48%;
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 6px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.income h3,
+.expense h3 {
+  font-size: 1.2rem;
+  color: var(--text-color);
+}
+
+.money {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.money.plus {
+  color: var(--income-color);
+}
+
+.money.minus {
+  color: var(--expense-color);
+}
+
+.form-container {
+  margin-bottom: 20px;
+}
+
+.form-container input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  font-size: 1rem;
+}
+
+.extra-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.small-btn {
+  flex: 1;
+  padding: 10px;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.history-btn {
+  background-color: var(--accent-color);
+  color: white;
+}
+
+.history-btn:hover {
+  background-color: #2980b9;
+}
+
+.summary-btn {
+  background-color: #2980b9;
+  color: white;
+}
+
+.summary-btn:hover {
+  background-color: #03f467;
+}
+
+.add-balance-card {
+  margin: 20px auto 0;
+  background-color: var(--card-bg);
+  padding: 20px;
+  width: 80%;
+  max-width: 300px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.add-balance-card h3 {
+  margin-bottom: 15px;
+  color: var(--text-color);
+  font-size: 1.1rem;
+}
+
+.add-balance-card input {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  margin-bottom: 15px;
+}
+
+.add-balance-card button {
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.add-balance-card button:hover {
+  background-color: #2980b9;
+}
+
+.transaction-buttons {
+  display: flex;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.income-btn,
+.expense-btn {
+  flex: 1;
+  padding: 12px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.income-btn {
+  background-color: var(--income-color);
+}
+
+.income-btn:hover {
+  background-color: #27ae60;
+}
+
+.expense-btn {
+  background-color: var(--expense-color);
+}
+
+.expense-btn:hover {
+  background-color: #c0392b;
+}
+
+#addBalanceBox {
+  /* display: none; */
+}
+
+#transactionTable {
+  /* display: none; */
+}
+
+.transaction-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 15px;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-top: 40px;
+  transition: 0.4s ease;
+}
+
+.transaction-table thead {
+  background: linear-gradient(135deg, #00b4db, #0083b0);
+  color: #ffffff;
+}
+
+.transaction-table thead th {
+  padding: 18px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: 0.5px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.transaction-table tbody tr {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.transaction-table tbody tr:hover {
+  background-color: #f0f8ff;
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.1);
+  transform: scale(1.005);
+}
+
+.transaction-table td {
+  padding: 16px 18px;
+  text-align: center;
+  border-bottom: 1px solid #eeeeee;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.transaction-table tbody tr:nth-child(odd) {
+  background-color: #fafafa;
+}
+
+.transaction-table td.income {
+  color: #27ae60;
+  font-weight: bold;
+}
+
+.transaction-table td.expense {
+  color: #e74c3c;
+  font-weight: bold;
+}
+
+.transaction-table td.total {
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.transaction-table td:nth-child(1), /* Date Column */
+.transaction-table th:nth-child(1) {
+  width: 25%;
+}
+
+.transaction-table td:nth-child(2), /* Description Column */
+.transaction-table th:nth-child(2) {
+  width: 30%;
+}
+
+.transaction-table td:nth-child(3), /* Income Column */
+.transaction-table th:nth-child(3) {
+  width: 15%;
+}
+
+.transaction-table td:nth-child(4), /* Expense Column */
+.transaction-table th:nth-child(4) {
+  width: 15%;
+}
+
+.transaction-table td:nth-child(5), /* Total Balance Column */
+.transaction-table th:nth-child(5) {
+  width: 15%;
+}
+
+@media screen and (max-width: 768px) {
+  .transaction-table {
+    font-size: 0.85rem;
+    overflow-x: auto;
+    display: block;
+    white-space: nowrap;
+  }
+
+  .transaction-table thead {
+    display: none;
+  }
+
+  .transaction-table tr {
+    display: block;
+    margin-bottom: 10px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  .transaction-table td {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .transaction-table td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    color: #555;
+    text-transform: capitalize;
+  }
+}
