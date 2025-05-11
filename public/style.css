@@ -361,3 +361,43 @@ h1 {
     text-transform: capitalize;
   }
 }
+
+
+
+/* Extra Buttons */
+.extra-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.extra-buttons a {
+  padding: 10px 20px;
+  text-decoration: none; /* Remove underline */
+  color: white;
+  background-color: #2196F3;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.extra-buttons a:hover {
+  background-color: #1e88e5; /* Darker blue on hover */
+  transform: translateY(-2px); /* Slight lift effect */
+}
+
+.extra-buttons .history-btn {
+  background-color: #4CAF50; /* Green for Transaction History */
+}
+
+.extra-buttons .history-btn:hover {
+  background-color: #45a049; /* Darker green for hover */
+}
+
+.extra-buttons .summary-btn {
+  background-color: #8e24aa; /* Purple for Income & Expense */
+}
+
+.extra-buttons .summary-btn:hover {
+  background-color: #7b1fa2; /* Darker purple for hover */
+}
